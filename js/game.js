@@ -38,23 +38,25 @@ drawBoard();
 
 // The Object Piece
 const PIECES = [
-    [I,"white"],
+    [A,"white"],
     [B,"white"],
-
+    [C,"white"],
+    [D,"white"],
+    [E,"white"],
 ];
 
 // generate random pieces
 
-function randomPiece(){
+function randomPiece(xx){
     let r = randomN = Math.floor(Math.random() * PIECES.length) // 0 -> 1
-    return new Piece( PIECES[r][0],PIECES[r][1], 2);
+    return new Piece( PIECES[r][0],PIECES[r][1],xx, 2);
 }
 
-let p = randomPiece();
-let d = new Piece(DOT, 'WHITE', -1)
-//let p = new Piece(B, 'WHITE', 2)
+let p = randomPiece(-1);
+let d = new Piece(DOT, 'WHITE',-1, -1);
+let np;
 
-function Piece(tetromino,color, ypos){
+function Piece(tetromino,color, xpos, ypos){
     this.tetromino = tetromino;
     this.color = color;
 
@@ -62,7 +64,7 @@ function Piece(tetromino,color, ypos){
     this.activeTetromino = this.tetromino[this.tetrominoN];
 
     // we need to control the pieces
-    this.x = -1;
+    this.x = xpos;
     this.y = ypos;
 }
 
@@ -109,10 +111,19 @@ Piece.prototype.moveLeft = function(){
 
 // control the piece
 
+let newx;
+let b = false;
+let move = []
 document.addEventListener('keydown', event => {
   if (event.keyCode === 40) {
-        p.moveDown();
+        np = p;
+        newx = np.x
+        np.moveDown();
+        p = randomPiece(newx);
+        move.push(np)
+        b = true
       }
+  if (event.)
 });
 
 let dropStart = Date.now();
@@ -121,7 +132,7 @@ let a = true
 function moveupper (){
     let now = Date.now();
     let delta = now - dropStart;
-    if(delta > 125){
+    if(delta > 60){
         if(a){
           if (i<9){
             d.moveRight();
@@ -140,6 +151,12 @@ function moveupper (){
             dropStart = Date.now();
           } else {
             a = true
+          }
+        }
+        if (b){
+          for( j= 0; j < move.length; j++){
+             move[j].moveDown();
+             //mconsole.log(move)
           }
         }
 
