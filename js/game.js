@@ -123,7 +123,7 @@ document.addEventListener('keydown', event => {
         move.push(np)
         b = true
       }
-  if (event.)
+  //if (event.)
 });
 
 let dropStart = Date.now();
