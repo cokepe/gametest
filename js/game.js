@@ -3,8 +3,8 @@ const ctx = cvs.getContext('2d');
 const scoreElement = document.getElementById('score');
 //ctx.scale(20, 20);
 
-const ROW = 20;
-const COL = COLUMN = 11;
+const ROW = 6;
+const COL = COLUMN = 6;
 const SQ = squareSize = 20;
 const VACANT = "#282C34"; //COLOR EMPTY
 
